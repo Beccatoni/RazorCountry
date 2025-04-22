@@ -1,0 +1,6 @@
+/bin
+/artifacts
+/obj
+*.log
+/packages
+appsettings.Development.json
