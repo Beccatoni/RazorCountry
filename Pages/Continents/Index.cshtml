@@ -37,13 +37,17 @@
         <div class="p-2" style="flex:1 0 auto">
             @item.Name
         </div>
-        <div class="p-2 btn-group gap-2" style="flex:0 0 25%; gap: 10px;" role="group">
+        <form method="post" class="p-2 btn-group gap-2" style="flex:0 0 25%; gap: 10px;" role="group">
             <a class="btn btn-primary btn-sm" asp-page="./Detail" asp-route-id="@item.ID">
                 Details
             </a>
             <a class="btn btn-primary btn-sm" asp-page="./Edit" asp-route-id="@item.ID">
                 Edit
             </a>
-        </div>
+            
+            <input type="submit" value="Delete" class="btn btn-danger btn-sm"/>
+            <input type="hidden" name="ID" value="@item.ID" />
+
+        </form>
     </div>
 }
