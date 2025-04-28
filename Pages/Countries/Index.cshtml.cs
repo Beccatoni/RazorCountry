@@ -32,7 +32,7 @@ public class Index : PageModel
         Country country = await _context.Countries.FindAsync(id);
         if (country != null)
         {
-            _context.Countries.Remove(country);
+            _context.Countries.Add(country);
         }
 
         await _context.SaveChangesAsync();
