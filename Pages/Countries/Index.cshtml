@@ -23,6 +23,11 @@
         </label>
         <input class="p-2" type="text" asp-for="SearchString"/>
         <input type="submit" value="Search" class="btn btn-primary btn-sm"/>
+        <select class="p-2" asp-for="SortField" onchange="this.form.submit();">
+            <option value="ID">Code</option>
+            <option value="Continent">Cont</option>
+            <option value="Name">Name</option>
+        </select>
     </form>
 </div>
 

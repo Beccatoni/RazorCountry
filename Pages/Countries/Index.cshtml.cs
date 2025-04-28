@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorCountry.Data;
 using RazorCountry.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RazorCountry.Pages.Countries;
 
@@ -19,6 +20,8 @@ public class Index : PageModel
     public string SearchString { get; set; }
     
     public List<Country> Countries { get; set; }
+    [BindProperty(SupportsGet = true)] 
+    public string SortField { get; set; } = "Name";
     
     public async Task OnGetAsync()
     {
@@ -27,7 +30,22 @@ public class Index : PageModel
         {
             countries = countries.Where(c => c.Name.Contains(SearchString));
         }
-        Countries = await _context.Countries.ToListAsync();
+
+        switch (SortField)
+        {
+            case "ID":
+                countries = countries.OrderBy(c => c.ID);
+                break;
+            case "Name":
+                countries = countries.OrderBy(c => c.Name);
+                break;
+            case "ContinentID": 
+                countries = countries.OrderBy(c => c.ContinentID);
+                break;
+            
+        }
+        
+        Countries = await countries.ToListAsync();
     }
 
     public async Task<IActionResult> OnPostAddCountryAsync(string id)
@@ -40,7 +58,7 @@ public class Index : PageModel
         Country country = await _context.Countries.FindAsync(id);
         if (country != null)
         {
-            _context.Countries.Add(country);
+            _context.Countries.Remove(country);
         }
 
         await _context.SaveChangesAsync();
