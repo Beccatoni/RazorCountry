@@ -16,6 +16,14 @@
             Create
         </a>
     </div>
+    
+    <form class="form-group">
+        <label asp-for="SearchString" class="control-label">
+            Name:
+        </label>
+        <input class="p-2" type="text" asp-for="SearchString"/>
+        <input type="submit" value="Search" class="btn btn-primary btn-sm"/>
+    </form>
 </div>
 
 <div class="d-flex bg-success text-white">

@@ -15,10 +15,18 @@ public class Index : PageModel
         _context = context;
     }
     
+    [BindProperty(SupportsGet = true)]
+    public string SearchString { get; set; }
+    
     public List<Country> Countries { get; set; }
     
     public async Task OnGetAsync()
     {
+        var countries = from c in _context.Countries select c;
+        if (!string.IsNullOrEmpty(SearchString))
+        {
+            countries = countries.Where(c => c.Name.Contains(SearchString));
+        }
         Countries = await _context.Countries.ToListAsync();
     }
 
