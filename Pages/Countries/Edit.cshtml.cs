@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorCountry.Data;
 using RazorCountry.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RazorCountry.Pages.Countries;
 
@@ -16,6 +17,8 @@ public class Edit : PageModel
     }
     [BindProperty]
     public Country Country { get; set; }
+    
+    public SelectList Continents { get; set; }
     
     public async Task<IActionResult> OnGetAsync(string id)
     {
@@ -33,6 +36,8 @@ public class Edit : PageModel
             
             
         }
+        
+        Continents = new SelectList(_context.Continents, nameof(Continent.ID), nameof(Continent.Name));
 
         return Page();
     }

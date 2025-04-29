@@ -7,9 +7,9 @@ public class Country
 {
     [Required]
     public string ID { get; set; }
-    [Required]
-    [StringLength(2, MinimumLength = 2)]
-    [RegularExpression(@"[A-Z]+", ErrorMessage = "Only upper case characters are allowed.")]
+    // [Required]
+    // [StringLength(2, MinimumLength = 2)]
+    // [RegularExpression(@"[A-Z]+", ErrorMessage = "Only upper case characters are allowed.")]
     [Display(Name = "Continent")]
     public string ContinentID { get; set; }
     [Required]
@@ -23,4 +23,6 @@ public class Country
     [DataType(DataType.Date)]
     [Range(typeof(DateTime), "10/24/1945", "1/1/2100", ErrorMessage = "The United Nations was created 10/24/1945.")]
     public DateTime? UnitedNationsDate { get; set; }
+    
+    public Continent Continent { get; set; }
 }

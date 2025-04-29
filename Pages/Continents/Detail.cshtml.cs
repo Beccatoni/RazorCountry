@@ -17,7 +17,10 @@ public class Detail : PageModel
     public Continent Continent { get; set; }
     public async Task<IActionResult> OnGetAsync(string id)
     {
-        Continent = await _context.Continents.FirstOrDefaultAsync(m=> m.ID == id);
+        Continent = await _context.Continents
+             .Include(c => c.Countries)
+             .AsNoTracking()
+             .FirstOrDefaultAsync(m=> m.ID == id);
 
         if (Continent == null)
         {

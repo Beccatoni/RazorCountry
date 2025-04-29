@@ -24,7 +24,7 @@
     </div>
     <div class="form-group d-flex">
         <label asp-for="Country.ContinentID" class="p-2 text-right" style="flex:0 0 15%"></label>
-        <input asp-for="Country.ContinentID" class="form-control" style="flex:1 0 auto;width:auto" />
+        <select asp-for="Country.ContinentID" asp-items="Model.Continents" class="form-control"></select>
     </div>
     <div class="form-group d-flex">
         <label asp-for="Country.Name" class="p-2 text-right" style="flex:0 0 15%"></label>
