@@ -18,6 +18,10 @@
     </div>
     
     <form class="form-group">
+        <label asp-for="SelectedContinent" class="control-label">Continent: </label>
+        <select asp-for="SelectedContinent" class="p-2" asp-items="Model.Continents" onchange="this.form.submit();">
+            <option value="">All</option>
+        </select>
         <label asp-for="SearchString" class="control-label">
             Name:
         </label>

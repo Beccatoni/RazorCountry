@@ -23,6 +23,11 @@ public class Index : PageModel
     [BindProperty(SupportsGet = true)] 
     public string SortField { get; set; } = "Name";
     
+    public SelectList Continents { get; set; }
+    
+    [BindProperty(SupportsGet = true)]
+    public string SelectedContinent { get; set; }
+    
     public async Task OnGetAsync()
     {
         var countries = from c in _context.Countries select c;
@@ -44,7 +49,13 @@ public class Index : PageModel
                 break;
             
         }
-        
+
+        if (!string.IsNullOrEmpty(SelectedContinent))
+        {
+            countries = countries.Where(c => c.ContinentID == SelectedContinent);
+        }
+        IQueryable<string> continentQuery = from c in _context.Continents orderby c.ID select c.ID;
+        Continents = new SelectList(await continentQuery.ToListAsync());
         Countries = await countries.ToListAsync();
     }
 
